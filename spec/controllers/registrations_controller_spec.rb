@@ -37,12 +37,6 @@ describe RegistrationsController, :type => :controller do
       AppConfig.settings.invitations.open = true
     end
 
-    it 'does redirect if there is an invalid invite token' do
-      get :new, :invite => {:token => 'fssdfsd'}
-      expect(flash[:error]).to eq(I18n.t('registrations.invalid_invite'))
-      expect(response).to redirect_to new_user_session_path
-    end
-
     it 'does not redirect if there is a valid invite token' do
       i = InvitationCode.create(:user => bob)
       get :new, :invite => {:token => i.token}
