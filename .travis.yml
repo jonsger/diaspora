@@ -15,8 +15,9 @@ cache: bundler
 
 branches:
   only:
-    - 'master'
+    - 'travis'
     - 'develop'
+    - 'invitation'
 
 bundler_args: "--without development production heroku --jobs 3 --retry 3"
 
