@@ -26,7 +26,7 @@ describe RegistrationsController, :type => :controller do
 
     it 'redirects #new to the login page' do
       get :new
-      expect(flash[:error]).to eq(I18n.t('registrations.invite.closed'))
+      expect(flash[:error]).to eq(I18n.t('shared.invitations.invites_closed'))
       expect(response).to redirect_to new_user_session_path
     end
     
@@ -35,11 +35,6 @@ describe RegistrationsController, :type => :controller do
   describe "#check_valid_invite!" do
     before do
       AppConfig.settings.invitations.open = true
-    end
-
-    it 'does redirect if there is an  invalid invite token' do
-      get :new, :invite => {:token => 'fssdfsd'}
-      expect(response).to be_redirect
     end
 
     it 'does not redirect if there is a valid invite token' do
